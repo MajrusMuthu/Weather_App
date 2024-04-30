@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:project/controller/controller.dart';
+import 'package:project/model/cityModel.dart';
+import 'package:project/view/historyPage.dart';
 import 'package:project/view/searchPage.dart';
 import 'package:project/view/widget/forecast.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<CityModel> searchResults = [];
   @override
   Widget build(BuildContext context) {
     return Consumer<WeatherDataProvider>(
@@ -54,21 +57,23 @@ class _HomePageState extends State<HomePage> {
                 iconColor: Colors.white,
                 onSelected: (value) {
                   if (value == 0) {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => SearchHistoryPage()),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SearchHistoryPage(),
+                      ),
+                    );
                     print("History menu is selected.");
                   } else if (value == 1) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              SearchPage()), // Navigate to SearchPage
+                        builder: (context) =>
+                            SearchPage(),
+                      ),
                     );
                     print("Search menu is selected.");
-
                   }
                 },
                 itemBuilder: (BuildContext context) => [

@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:project/controller/controller.dart';
+import 'package:project/controller/provider/searchProvider.dart';
 import 'package:project/model/cityModel.dart';
+import 'package:project/model/weatherDataModel.dart';
 import 'package:project/view/homePage.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +14,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final weatherProvider = Provider.of<WeatherDataProvider>(context);
-
+final searchHistoryProvider = Provider.of<SearchHistoryProvider>(context);
     void _showDialog(String title, String content) {
       showDialog(
         context: context,
@@ -57,6 +59,7 @@ class SearchPage extends StatelessWidget {
           print(cityInfo.lon);
           weatherProvider.fetchWeatherData(cityInfo.lat, cityInfo.lon);
           weatherProvider.fetchWeatherDataList(cityInfo.lat, cityInfo.lon);
+           searchHistoryProvider.addSearchEntry(SearchEntry(cityName, cityInfo.lat, cityInfo.lon));
           Navigator.push(
             context,
             MaterialPageRoute(
